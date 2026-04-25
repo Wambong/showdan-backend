@@ -72,6 +72,7 @@ services:
     environment:
       DATABASE_URL: "postgresql://showdan:XkVMBg5Ik7vEW1hq8Orb@db:5432/postgres"
       REDIS_URL: "redis://redis:6379/0"
+      ELASTIC_URL: "http://elasticsearch:9200"
     image: showdan/backend
     container_name: "showdan_backend"
     ports:

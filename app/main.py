@@ -1,4 +1,5 @@
 import time
+import logging
 
 from fastapi import FastAPI
 from sqlalchemy import text
@@ -14,8 +15,12 @@ from app.core.config import settings
 from app.auth.router import router as auth_router
 from app.db.database import Base, engine
 from app.models.chat_user import ChatUser
+from app.news.router import admin_router as news_admin_router
+from app.news.router import router as news_router
+from app.news.services import ensure_news_index, install_news_database
 
 app = FastAPI(title=settings.PROJECT_NAME)
+logger = logging.getLogger(__name__)
 
 # Добавляем middleware для сессий
 app.add_middleware(
@@ -38,6 +43,8 @@ app.add_middleware(
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(performers.router)
 app.include_router(chat_router)
+app.include_router(news_router)
+app.include_router(news_admin_router)
 
 
 @app.on_event("startup")
@@ -153,6 +160,11 @@ def create_chat_tables():
                 chat_models.ChatConversation.__table__,
                 chat_models.ChatMessage.__table__,
             ])
+            install_news_database()
+            try:
+                ensure_news_index()
+            except Exception as exc:
+                logger.warning("News Elasticsearch index setup failed: %s", exc)
             return
         except OperationalError:
             if attempt == 30:
