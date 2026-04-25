@@ -1,0 +1,545 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Language Names\n"
+"POT-Creation-Date: 2026-04-15 18:59+0000\n"
+"PO-Revision-Date: 2026-04-15 18:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: Uzbek\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Abkhazian"
+msgstr "Abxaz tili"
+
+msgid "Afar"
+msgstr "Afar tili"
+
+msgid "Afrikaans"
+msgstr "Afrikaans tili"
+
+msgid "Akan"
+msgstr "Akan tili"
+
+msgid "Albanian"
+msgstr "Alban tili"
+
+msgid "Amharic"
+msgstr "Amxar tili"
+
+msgid "Arabic"
+msgstr "Arab tili"
+
+msgid "Aragonese"
+msgstr "Aragon tili"
+
+msgid "Armenian"
+msgstr "Arman tili"
+
+msgid "Assamese"
+msgstr "Assam tili"
+
+msgid "Avaric"
+msgstr "Avar tili"
+
+msgid "Avestan"
+msgstr "Avesto tili"
+
+msgid "Aymara"
+msgstr "Aymara tili"
+
+msgid "Azerbaijani"
+msgstr "Ozarbayjon tili"
+
+msgid "Bambara"
+msgstr "Bambara tili"
+
+msgid "Bashkir"
+msgstr "Boshqird tili"
+
+msgid "Basque"
+msgstr "Bask tili"
+
+msgid "Belarusian"
+msgstr "Belarus tili"
+
+msgid "Bengali"
+msgstr "Bengal tili"
+
+msgid "Bislama"
+msgstr "Bislama tili"
+
+msgid "Bosnian"
+msgstr "Bosniya tili"
+
+msgid "Breton"
+msgstr "Breton tili"
+
+msgid "Bulgarian"
+msgstr "Bolgar tili"
+
+msgid "Burmese"
+msgstr "Birma tili"
+
+msgid "Catalan"
+msgstr "Katalan tili"
+
+msgid "Chamorro"
+msgstr "Chamorro tili"
+
+msgid "Chechen"
+msgstr "Chechen tili"
+
+msgid "Chinese"
+msgstr "Xitoy tili"
+
+msgid "Church Slavonic"
+msgstr "Cherkovslavyan tili"
+
+msgid "Chuvash"
+msgstr "Chuvash tili"
+
+msgid "Cornish"
+msgstr "Korn tili"
+
+msgid "Corsican"
+msgstr "Korsika tili"
+
+msgid "Cree"
+msgstr "Kri tili"
+
+msgid "Croatian"
+msgstr "Xorvat tili"
+
+msgid "Czech"
+msgstr "Chex tili"
+
+msgid "Danish"
+msgstr "Dan tili"
+
+msgid "Divehi"
+msgstr "Divehi tili"
+
+msgid "Dutch"
+msgstr "Niderland tili"
+
+msgid "Dzongkha"
+msgstr "Dzongxa tili"
+
+msgid "English"
+msgstr "Ingliz tili"
+
+msgid "Esperanto"
+msgstr "Esperanto"
+
+msgid "Estonian"
+msgstr "Eston tili"
+
+msgid "Ewe"
+msgstr "Eve tili"
+
+msgid "Faroese"
+msgstr "Farer tili"
+
+msgid "Fijian"
+msgstr "Fiji tili"
+
+msgid "Finnish"
+msgstr "Fin tili"
+
+msgid "French"
+msgstr "Fransuz tili"
+
+msgid "Western Frisian"
+msgstr "G'arbiy friz tili"
+
+msgid "Fulah"
+msgstr "Fula tili"
+
+msgid "Georgian"
+msgstr "Gruzin tili"
+
+msgid "German"
+msgstr "Nemis tili"
+
+msgid "Greek"
+msgstr "Yunon tili"
+
+msgid "Greenlandic"
+msgstr "Grenland tili"
+
+msgid "Guarani"
+msgstr "Guarani tili"
+
+msgid "Gujarati"
+msgstr "Gujarat tili"
+
+msgid "Haitian"
+msgstr "Gaiti tili"
+
+msgid "Hausa"
+msgstr "Hausa tili"
+
+msgid "Hebrew"
+msgstr "Ibroniy tili"
+
+msgid "Herero"
+msgstr "Herero tili"
+
+msgid "Hindi"
+msgstr "Hind tili"
+
+msgid "Hiri Motu"
+msgstr "Hiri motu tili"
+
+msgid "Hungarian"
+msgstr "Venger tili"
+
+msgid "Icelandic"
+msgstr "Island tili"
+
+msgid "Ido"
+msgstr "Ido"
+
+msgid "Igbo"
+msgstr "Igbo tili"
+
+msgid "Indonesian"
+msgstr "Indonez tili"
+
+msgid "Interlingua"
+msgstr "Interlingva"
+
+msgid "Interlingue"
+msgstr "Interlingve"
+
+msgid "Inuktitut"
+msgstr "Inuktitut tili"
+
+msgid "Inupiaq"
+msgstr "Inupiak tili"
+
+msgid "Irish"
+msgstr "Irland tili"
+
+msgid "Italian"
+msgstr "Italyan tili"
+
+msgid "Japanese"
+msgstr "Yapon tili"
+
+msgid "Javanese"
+msgstr "Yava tili"
+
+msgid "Kannada"
+msgstr "Kannada tili"
+
+msgid "Kanuri"
+msgstr "Kanuri tili"
+
+msgid "Kashmiri"
+msgstr "Kashmir tili"
+
+msgid "Kazakh"
+msgstr "Qozoq tili"
+
+msgid "Khmer"
+msgstr "Xmer tili"
+
+msgid "Kikuyu"
+msgstr "Kikuyu tili"
+
+msgid "Kinyarwanda"
+msgstr "Kinyaruanda tili"
+
+msgid "Kyrgyz"
+msgstr "Qirg'iz tili"
+
+msgid "Komi"
+msgstr "Komi tili"
+
+msgid "Kongo"
+msgstr "Kongo tili"
+
+msgid "Korean"
+msgstr "Koreys tili"
+
+msgid "Kurdish"
+msgstr "Kurd tili"
+
+msgid "Lao"
+msgstr "Lao tili"
+
+msgid "Latin"
+msgstr "Lotin tili"
+
+msgid "Latvian"
+msgstr "Latish tili"
+
+msgid "Limburgish"
+msgstr "Limburg tili"
+
+msgid "Lingala"
+msgstr "Lingala tili"
+
+msgid "Lithuanian"
+msgstr "Litva tili"
+
+msgid "Luxembourgish"
+msgstr "Lyuksemburg tili"
+
+msgid "Macedonian"
+msgstr "Makedon tili"
+
+msgid "Malagasy"
+msgstr "Malagasi tili"
+
+msgid "Malay"
+msgstr "Malay tili"
+
+msgid "Malayalam"
+msgstr "Malayalam tili"
+
+msgid "Maltese"
+msgstr "Malta tili"
+
+msgid "Manx"
+msgstr "Manks tili"
+
+msgid "Maori"
+msgstr "Maori tili"
+
+msgid "Marathi"
+msgstr "Marathi tili"
+
+msgid "Marshallese"
+msgstr "Marshall tili"
+
+msgid "Mongolian"
+msgstr "Mo'g'ul tili"
+
+msgid "Nauru"
+msgstr "Nauru tili"
+
+msgid "Navajo"
+msgstr "Navaxo tili"
+
+msgid "Nepali"
+msgstr "Nepal tili"
+
+msgid "North Ndebele"
+msgstr "Shimoliy ndebele tili"
+
+msgid "South Ndebele"
+msgstr "Janubiy ndebele tili"
+
+msgid "Ndonga"
+msgstr "Ndonga tili"
+
+msgid "Norwegian"
+msgstr "Norveg tili"
+
+msgid "Norwegian Bokmål"
+msgstr "Norveg bokmol tili"
+
+msgid "Norwegian Nynorsk"
+msgstr "Norveg nynorsk tili"
+
+msgid "Occitan"
+msgstr "Oksitan tili"
+
+msgid "Ojibwa"
+msgstr "Ojibva tili"
+
+msgid "Oriya"
+msgstr "Oriya tili"
+
+msgid "Oromo"
+msgstr "Oromo tili"
+
+msgid "Ossetian"
+msgstr "Osetin tili"
+
+msgid "Pali"
+msgstr "Pali tili"
+
+msgid "Pashto"
+msgstr "Pashto tili"
+
+msgid "Persian"
+msgstr "Fors tili"
+
+msgid "Polish"
+msgstr "Polyak tili"
+
+msgid "Portuguese"
+msgstr "Portugal tili"
+
+msgid "Punjabi"
+msgstr "Panjob tili"
+
+msgid "Quechua"
+msgstr "Kechua tili"
+
+msgid "Romanian"
+msgstr "Rumin tili"
+
+msgid "Romansh"
+msgstr "Romansh tili"
+
+msgid "Rundi"
+msgstr "Rundi tili"
+
+msgid "Russian"
+msgstr "Rus tili"
+
+msgid "Samoan"
+msgstr "Samoa tili"
+
+msgid "Sango"
+msgstr "Sango tili"
+
+msgid "Sanskrit"
+msgstr "Sanskrit"
+
+msgid "Sardinian"
+msgstr "Sardin tili"
+
+msgid "Scottish Gaelic"
+msgstr "Shotland gael tili"
+
+msgid "Serbian"
+msgstr "Serb tili"
+
+msgid "Shona"
+msgstr "Shona tili"
+
+msgid "Sindhi"
+msgstr "Sindhi tili"
+
+msgid "Sinhala"
+msgstr "Sinxal tili"
+
+msgid "Slovak"
+msgstr "Slovak tili"
+
+msgid "Slovenian"
+msgstr "Sloven tili"
+
+msgid "Somali"
+msgstr "Somali tili"
+
+msgid "Southern Sotho"
+msgstr "Janubiy soto tili"
+
+msgid "Spanish"
+msgstr "Ispan tili"
+
+msgid "Sundanese"
+msgstr "Sunda tili"
+
+msgid "Swahili"
+msgstr "Suaxili tili"
+
+msgid "Swati"
+msgstr "Svati tili"
+
+msgid "Swedish"
+msgstr "Shved tili"
+
+msgid "Tagalog"
+msgstr "Tagalog tili"
+
+msgid "Tahitian"
+msgstr "Taxiti tili"
+
+msgid "Tajik"
+msgstr "Tojik tili"
+
+msgid "Tamil"
+msgstr "Tamil tili"
+
+msgid "Tatar"
+msgstr "Tatar tili"
+
+msgid "Telugu"
+msgstr "Telugu tili"
+
+msgid "Thai"
+msgstr "Tay tili"
+
+msgid "Tibetan"
+msgstr "Tibet tili"
+
+msgid "Tigrinya"
+msgstr "Tigrinya tili"
+
+msgid "Tonga"
+msgstr "Tonga tili"
+
+msgid "Tsonga"
+msgstr "Tsonga tili"
+
+msgid "Tswana"
+msgstr "Tsvana tili"
+
+msgid "Turkish"
+msgstr "Turk tili"
+
+msgid "Turkmen"
+msgstr "Turkman tili"
+
+msgid "Uighur"
+msgstr "Uyg'ur tili"
+
+msgid "Ukrainian"
+msgstr "Ukrain tili"
+
+msgid "Urdu"
+msgstr "Urdu tili"
+
+msgid "Uzbek"
+msgstr "O'zbek tili"
+
+msgid "Venda"
+msgstr "Venda tili"
+
+msgid "Vietnamese"
+msgstr "Vetnam tili"
+
+msgid "Volapük"
+msgstr "Volapyuk tili"
+
+msgid "Walloon"
+msgstr "Vallon tili"
+
+msgid "Welsh"
+msgstr "Uels tili"
+
+msgid "Wolof"
+msgstr "Volof tili"
+
+msgid "Xhosa"
+msgstr "Kxosa tili"
+
+msgid "Yiddish"
+msgstr "Yiddish tili"
+
+msgid "Yoruba"
+msgstr "Yoruba tili"
+
+msgid "Zhuang"
+msgstr "Chjuan tili"
+
+msgid "Zulu"
+msgstr "Zulu tili"
+
+msgid "Improviser"
+msgstr "Improvizator"
+
+msgid "Scenarist"
+msgstr "Stsenarchi"
+
+msgid "MC"
+msgstr "Oʻyin boshlovchi"

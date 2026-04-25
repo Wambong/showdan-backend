@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShowDan Chat</title>
+  <style>
+    :root {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #eef1f5;
+      color: #17202a;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; }
+    main { display: grid; grid-template-columns: 360px 1fr; height: 100vh; }
+    aside { border-right: 1px solid #d7dde6; background: #f8fafc; display: grid; grid-template-rows: auto auto 1fr; min-width: 0; }
+    header { min-height: 70px; padding: 14px 16px; border-bottom: 1px solid #d7dde6; background: #fff; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    h1, h2, p { margin: 0; }
+    h1 { font-size: 18px; }
+    h2 { font-size: 16px; }
+    button, a.login {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      border: 0;
+      border-radius: 6px;
+      padding: 8px 12px;
+      background: #1f7a62;
+      color: #fff;
+      font: inherit;
+      font-weight: 650;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .me { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .avatar { width: 42px; height: 42px; border-radius: 50%; background: #dce7f3; object-fit: cover; flex: 0 0 auto; }
+    .avatar.small { width: 36px; height: 36px; }
+    .identity { min-width: 0; }
+    .name { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .subtle { color: #667085; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .search { padding: 10px 12px; border-bottom: 1px solid #d7dde6; }
+    input {
+      width: 100%;
+      border: 1px solid #cfd6e4;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font: inherit;
+      background: #fff;
+      color: #17202a;
+    }
+    .users { overflow: auto; }
+    .user {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border: 0;
+      border-bottom: 1px solid #e5eaf0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      border-radius: 0;
+      min-height: 66px;
+    }
+    .user:hover, .user.active { background: #e8f3ef; }
+    .chat { display: grid; grid-template-rows: auto 1fr auto; min-width: 0; background: #f2f4f7; }
+    .chat header { justify-content: flex-start; }
+    .messages { overflow: auto; display: flex; flex-direction: column; gap: 10px; padding: 18px; }
+    .empty { margin: auto; color: #667085; text-align: center; max-width: 320px; }
+    .message { max-width: min(560px, 76%); padding: 10px 12px; border-radius: 8px; background: #fff; box-shadow: 0 2px 8px rgba(16, 24, 40, .06); }
+    .message.mine { align-self: flex-end; background: #dff7ed; }
+    .meta { font-size: 12px; color: #667085; margin-bottom: 4px; }
+    .message img, .message video { display: block; max-width: 100%; border-radius: 6px; margin-top: 6px; }
+    .message audio { display: block; width: 100%; margin-top: 6px; }
+    .media-link { display: inline-block; margin-top: 6px; color: #1f7a62; font-weight: 650; }
+    form { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 14px; border-top: 1px solid #d7dde6; background: #fff; }
+    .composer { position: relative; min-width: 0; }
+    .composer input[type="text"] { padding-right: 54px; }
+    .attach {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      min-height: 34px;
+      width: 42px;
+      padding: 0;
+      border-radius: 5px;
+      background: #eef3f0;
+      color: #1f7a62;
+    }
+    form[hidden], .hidden { display: none; }
+    @media (max-width: 800px) {
+      main { grid-template-columns: 1fr; }
+      aside.chat-open { display: none; }
+      .chat:not(.chat-open) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <aside id="sidebar">
+      <header>
+        <div class="me" id="meBox">
+          <div class="identity">
+            <h1>ShowDan Chat</h1>
+            <p class="subtle">Checking login...</p>
+          </div>
+        </div>
+        <a class="login hidden" id="loginLink" href="/auth/google/login">Google login</a>
+      </header>
+      <div class="search"><input id="search" placeholder="Search users" /></div>
+      <div class="users" id="users"></div>
+    </aside>
+
+    <section class="chat" id="chatPane">
+      <header>
+        <img class="avatar hidden" id="activeAvatar" alt="" />
+        <div>
+          <h2 id="activeName">Select a user</h2>
+          <p class="subtle" id="socketStatus">Choose someone from the left to start chatting</p>
+        </div>
+      </header>
+      <div class="messages" id="messages">
+        <p class="empty">Your conversations open here.</p>
+      </div>
+      <form id="messageForm" hidden>
+        <div class="composer">
+          <input name="body" type="text" autocomplete="off" placeholder="Type a message" />
+          <button class="attach" id="attachButton" type="button" title="Attach file">+</button>
+          <input class="hidden" id="mediaInput" type="file" />
+        </div>
+        <button>Send</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const apiBase = window.location.origin;
+    let me = null;
+    let users = [];
+    let activeUser = null;
+    let conversationId = null;
+    let socket = null;
+
+    const meBox = document.querySelector("#meBox");
+    const loginLink = document.querySelector("#loginLink");
+    const usersBox = document.querySelector("#users");
+    const messages = document.querySelector("#messages");
+    const socketStatus = document.querySelector("#socketStatus");
+    const activeName = document.querySelector("#activeName");
+    const activeAvatar = document.querySelector("#activeAvatar");
+    const messageForm = document.querySelector("#messageForm");
+    const mediaInput = document.querySelector("#mediaInput");
+    const attachButton = document.querySelector("#attachButton");
+
+    const asJson = async (response) => {
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.detail || response.statusText);
+      return data;
+    };
+
+    const avatar = (user, className = "avatar") => {
+      if (user.picture) return `<img class="${className}" src="${user.picture}" alt="" />`;
+      return `<div class="${className}"></div>`;
+    };
+
+    const renderMe = () => {
+      loginLink.classList.add("hidden");
+      meBox.innerHTML = `${avatar(me)}<div class="identity"><h1>${me.name} (me)</h1><p class="subtle">${me.email || ""}</p></div>`;
+    };
+
+    const renderUsers = (items = users) => {
+      if (!me) {
+        usersBox.innerHTML = `<p class="empty">Login with Google to see users.</p>`;
+        return;
+      }
+      if (!items.length) {
+        usersBox.innerHTML = `<p class="empty">No other users yet. Login in another browser with another Google account.</p>`;
+        return;
+      }
+      usersBox.innerHTML = items.map(user => `
+        <button class="user ${activeUser?.id === user.id ? "active" : ""}" data-id="${user.id}">
+          ${avatar(user, "avatar small")}
+          <span class="identity">
+            <span class="name">${user.name}</span>
+            <span class="subtle">${user.email || ""}</span>
+          </span>
+        </button>
+      `).join("");
+    };
+
+    const addMessage = (message) => {
+      const empty = messages.querySelector(".empty");
+      if (empty) empty.remove();
+      const el = document.createElement("div");
+      el.className = "message" + (message.sender_id === me.id ? " mine" : "");
+      el.innerHTML = `<div class="meta">${message.sender_id === me.id ? "me" : activeUser?.name || "user"} - ${new Date(message.created_at).toLocaleTimeString()}</div><div class="body"></div>`;
+      el.querySelector(".body").textContent = message.media_url ? (message.media_name || message.body) : message.body;
+      if (message.media_url) {
+        const mediaUrl = `${apiBase}${message.media_url}`;
+        const mediaType = message.media_type || "";
+        if (mediaType.startsWith("image/")) {
+          el.insertAdjacentHTML("beforeend", `<img src="${mediaUrl}" alt="${message.media_name || "image"}" />`);
+        } else if (mediaType.startsWith("video/")) {
+          el.insertAdjacentHTML("beforeend", `<video src="${mediaUrl}" controls></video>`);
+        } else if (mediaType.startsWith("audio/")) {
+          el.insertAdjacentHTML("beforeend", `<audio src="${mediaUrl}" controls></audio>`);
+        } else {
+          el.insertAdjacentHTML("beforeend", `<a class="media-link" href="${mediaUrl}" target="_blank" rel="noreferrer">Open file</a>`);
+        }
+      }
+      messages.appendChild(el);
+      messages.scrollTop = messages.scrollHeight;
+    };
+
+    const openConversation = async (user) => {
+      activeUser = user;
+      renderUsers();
+      activeName.textContent = user.name;
+      if (user.picture) {
+        activeAvatar.src = user.picture;
+        activeAvatar.classList.remove("hidden");
+      } else {
+        activeAvatar.classList.add("hidden");
+      }
+      messages.replaceChildren();
+      socketStatus.textContent = "Opening conversation...";
+
+      const conversation = await asJson(await fetch(`${apiBase}/chat/conversations`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_one: { id: me.id }, user_two: { id: user.id } }),
+      }));
+      conversationId = conversation.id;
+
+      const history = await asJson(await fetch(`${apiBase}/chat/conversations/${conversationId}/messages`));
+      if (!history.length) messages.innerHTML = `<p class="empty">No messages yet.</p>`;
+      history.forEach(addMessage);
+      messageForm.hidden = false;
+
+      if (socket) socket.close();
+      const wsBase = window.location.protocol === "https:" ? "wss" : "ws";
+      socket = new WebSocket(`${wsBase}://${window.location.host}/chat/ws/${conversationId}`);
+      socket.onopen = () => { socketStatus.textContent = "Online"; };
+      socket.onclose = () => { socketStatus.textContent = "Disconnected"; };
+      socket.onmessage = (event) => {
+        const payload = JSON.parse(event.data);
+        if (payload.event === "message.created") addMessage(payload.message);
+        if (payload.event === "error") socketStatus.textContent = JSON.stringify(payload.detail);
+      };
+    };
+
+    usersBox.addEventListener("click", (event) => {
+      const button = event.target.closest(".user");
+      if (!button) return;
+      const user = users.find(item => item.id === button.dataset.id);
+      if (user) openConversation(user).catch(error => { socketStatus.textContent = error.message; });
+    });
+
+    document.querySelector("#search").addEventListener("input", (event) => {
+      const query = event.target.value.toLowerCase();
+      renderUsers(users.filter(user => `${user.name} ${user.email || ""}`.toLowerCase().includes(query)));
+    });
+
+    messageForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!conversationId) return;
+      const bodyInput = event.currentTarget.querySelector("input[name='body']");
+      const body = bodyInput.value.trim();
+      if (!body) return;
+      await asJson(await fetch(`${apiBase}/chat/conversations/${conversationId}/messages`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sender_id: me.id, body }),
+      }));
+      bodyInput.value = "";
+    });
+
+    attachButton.addEventListener("click", () => mediaInput.click());
+
+    mediaInput.addEventListener("change", async () => {
+      if (!conversationId || !mediaInput.files.length) return;
+      const form = new FormData();
+      form.append("sender_id", me.id);
+      form.append("file", mediaInput.files[0]);
+      attachButton.disabled = true;
+      try {
+        await asJson(await fetch(`${apiBase}/chat/conversations/${conversationId}/media`, {
+          method: "POST",
+          body: form,
+        }));
+      } catch (error) {
+        socketStatus.textContent = error.message;
+      } finally {
+        mediaInput.value = "";
+        attachButton.disabled = false;
+      }
+    });
+
+    const boot = async () => {
+      try {
+        me = await asJson(await fetch(`${apiBase}/chat/me`));
+        renderMe();
+        users = await asJson(await fetch(`${apiBase}/chat/users`));
+        renderUsers();
+      } catch (error) {
+        loginLink.classList.remove("hidden");
+        meBox.innerHTML = `<div class="identity"><h1>ShowDan Chat</h1><p class="subtle">Login required</p></div>`;
+        usersBox.innerHTML = `<p class="empty">${error.message}</p>`;
+      }
+    };
+    boot();
+  </script>
+</body>
+</html>

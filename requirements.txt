@@ -1,0 +1,14 @@
+fastapi[standard]
+google-auth
+python-jose
+authlib[starlette]
+python-dotenv
+itsdangerous
+requests
+elasticsearch
+sqlalchemy
+asyncpg
+geoalchemy2
+psycopg2-binary
+redis
+python-multipart

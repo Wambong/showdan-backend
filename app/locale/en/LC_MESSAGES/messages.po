@@ -1,0 +1,545 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Language Names\n"
+"POT-Creation-Date: 2026-04-15 19:03+0000\n"
+"PO-Revision-Date: 2026-04-15 19:03+0000\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Abkhazian"
+msgstr "Abkhazian"
+
+msgid "Afar"
+msgstr "Afar"
+
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
+msgid "Akan"
+msgstr "Akan"
+
+msgid "Albanian"
+msgstr "Albanian"
+
+msgid "Amharic"
+msgstr "Amharic"
+
+msgid "Arabic"
+msgstr "Arabic"
+
+msgid "Aragonese"
+msgstr "Aragonese"
+
+msgid "Armenian"
+msgstr "Armenian"
+
+msgid "Assamese"
+msgstr "Assamese"
+
+msgid "Avaric"
+msgstr "Avaric"
+
+msgid "Avestan"
+msgstr "Avestan"
+
+msgid "Aymara"
+msgstr "Aymara"
+
+msgid "Azerbaijani"
+msgstr "Azerbaijani"
+
+msgid "Bambara"
+msgstr "Bambara"
+
+msgid "Bashkir"
+msgstr "Bashkir"
+
+msgid "Basque"
+msgstr "Basque"
+
+msgid "Belarusian"
+msgstr "Belarusian"
+
+msgid "Bengali"
+msgstr "Bengali"
+
+msgid "Bislama"
+msgstr "Bislama"
+
+msgid "Bosnian"
+msgstr "Bosnian"
+
+msgid "Breton"
+msgstr "Breton"
+
+msgid "Bulgarian"
+msgstr "Bulgarian"
+
+msgid "Burmese"
+msgstr "Burmese"
+
+msgid "Catalan"
+msgstr "Catalan"
+
+msgid "Chamorro"
+msgstr "Chamorro"
+
+msgid "Chechen"
+msgstr "Chechen"
+
+msgid "Chinese"
+msgstr "Chinese"
+
+msgid "Church Slavonic"
+msgstr "Church Slavonic"
+
+msgid "Chuvash"
+msgstr "Chuvash"
+
+msgid "Cornish"
+msgstr "Cornish"
+
+msgid "Corsican"
+msgstr "Corsican"
+
+msgid "Cree"
+msgstr "Cree"
+
+msgid "Croatian"
+msgstr "Croatian"
+
+msgid "Czech"
+msgstr "Czech"
+
+msgid "Danish"
+msgstr "Danish"
+
+msgid "Divehi"
+msgstr "Divehi"
+
+msgid "Dutch"
+msgstr "Dutch"
+
+msgid "Dzongkha"
+msgstr "Dzongkha"
+
+msgid "English"
+msgstr "English"
+
+msgid "Esperanto"
+msgstr "Esperanto"
+
+msgid "Estonian"
+msgstr "Estonian"
+
+msgid "Ewe"
+msgstr "Ewe"
+
+msgid "Faroese"
+msgstr "Faroese"
+
+msgid "Fijian"
+msgstr "Fijian"
+
+msgid "Finnish"
+msgstr "Finnish"
+
+msgid "French"
+msgstr "French"
+
+msgid "Western Frisian"
+msgstr "Western Frisian"
+
+msgid "Fulah"
+msgstr "Fulah"
+
+msgid "Georgian"
+msgstr "Georgian"
+
+msgid "German"
+msgstr "German"
+
+msgid "Greek"
+msgstr "Greek"
+
+msgid "Greenlandic"
+msgstr "Greenlandic"
+
+msgid "Guarani"
+msgstr "Guarani"
+
+msgid "Gujarati"
+msgstr "Gujarati"
+
+msgid "Haitian"
+msgstr "Haitian"
+
+msgid "Hausa"
+msgstr "Hausa"
+
+msgid "Hebrew"
+msgstr "Hebrew"
+
+msgid "Herero"
+msgstr "Herero"
+
+msgid "Hindi"
+msgstr "Hindi"
+
+msgid "Hiri Motu"
+msgstr "Hiri Motu"
+
+msgid "Hungarian"
+msgstr "Hungarian"
+
+msgid "Icelandic"
+msgstr "Icelandic"
+
+msgid "Ido"
+msgstr "Ido"
+
+msgid "Igbo"
+msgstr "Igbo"
+
+msgid "Indonesian"
+msgstr "Indonesian"
+
+msgid "Interlingua"
+msgstr "Interlingua"
+
+msgid "Interlingue"
+msgstr "Interlingue"
+
+msgid "Inuktitut"
+msgstr "Inuktitut"
+
+msgid "Inupiaq"
+msgstr "Inupiaq"
+
+msgid "Irish"
+msgstr "Irish"
+
+msgid "Italian"
+msgstr "Italian"
+
+msgid "Japanese"
+msgstr "Japanese"
+
+msgid "Javanese"
+msgstr "Javanese"
+
+msgid "Kannada"
+msgstr "Kannada"
+
+msgid "Kanuri"
+msgstr "Kanuri"
+
+msgid "Kashmiri"
+msgstr "Kashmiri"
+
+msgid "Kazakh"
+msgstr "Kazakh"
+
+msgid "Khmer"
+msgstr "Khmer"
+
+msgid "Kikuyu"
+msgstr "Kikuyu"
+
+msgid "Kinyarwanda"
+msgstr "Kinyarwanda"
+
+msgid "Kyrgyz"
+msgstr "Kyrgyz"
+
+msgid "Komi"
+msgstr "Komi"
+
+msgid "Kongo"
+msgstr "Kongo"
+
+msgid "Korean"
+msgstr "Korean"
+
+msgid "Kurdish"
+msgstr "Kurdish"
+
+msgid "Lao"
+msgstr "Lao"
+
+msgid "Latin"
+msgstr "Latin"
+
+msgid "Latvian"
+msgstr "Latvian"
+
+msgid "Limburgish"
+msgstr "Limburgish"
+
+msgid "Lingala"
+msgstr "Lingala"
+
+msgid "Lithuanian"
+msgstr "Lithuanian"
+
+msgid "Luxembourgish"
+msgstr "Luxembourgish"
+
+msgid "Macedonian"
+msgstr "Macedonian"
+
+msgid "Malagasy"
+msgstr "Malagasy"
+
+msgid "Malay"
+msgstr "Malay"
+
+msgid "Malayalam"
+msgstr "Malayalam"
+
+msgid "Maltese"
+msgstr "Maltese"
+
+msgid "Manx"
+msgstr "Manx"
+
+msgid "Maori"
+msgstr "Maori"
+
+msgid "Marathi"
+msgstr "Marathi"
+
+msgid "Marshallese"
+msgstr "Marshallese"
+
+msgid "Mongolian"
+msgstr "Mongolian"
+
+msgid "Nauru"
+msgstr "Nauru"
+
+msgid "Navajo"
+msgstr "Navajo"
+
+msgid "Nepali"
+msgstr "Nepali"
+
+msgid "North Ndebele"
+msgstr "North Ndebele"
+
+msgid "South Ndebele"
+msgstr "South Ndebele"
+
+msgid "Ndonga"
+msgstr "Ndonga"
+
+msgid "Norwegian"
+msgstr "Norwegian"
+
+msgid "Norwegian Bokmål"
+msgstr "Norwegian Bokmål"
+
+msgid "Norwegian Nynorsk"
+msgstr "Norwegian Nynorsk"
+
+msgid "Occitan"
+msgstr "Occitan"
+
+msgid "Ojibwa"
+msgstr "Ojibwa"
+
+msgid "Oriya"
+msgstr "Oriya"
+
+msgid "Oromo"
+msgstr "Oromo"
+
+msgid "Ossetian"
+msgstr "Ossetian"
+
+msgid "Pali"
+msgstr "Pali"
+
+msgid "Pashto"
+msgstr "Pashto"
+
+msgid "Persian"
+msgstr "Persian"
+
+msgid "Polish"
+msgstr "Polish"
+
+msgid "Portuguese"
+msgstr "Portuguese"
+
+msgid "Punjabi"
+msgstr "Punjabi"
+
+msgid "Quechua"
+msgstr "Quechua"
+
+msgid "Romanian"
+msgstr "Romanian"
+
+msgid "Romansh"
+msgstr "Romansh"
+
+msgid "Rundi"
+msgstr "Rundi"
+
+msgid "Russian"
+msgstr "Russian"
+
+msgid "Samoan"
+msgstr "Samoan"
+
+msgid "Sango"
+msgstr "Sango"
+
+msgid "Sanskrit"
+msgstr "Sanskrit"
+
+msgid "Sardinian"
+msgstr "Sardinian"
+
+msgid "Scottish Gaelic"
+msgstr "Scottish Gaelic"
+
+msgid "Serbian"
+msgstr "Serbian"
+
+msgid "Shona"
+msgstr "Shona"
+
+msgid "Sindhi"
+msgstr "Sindhi"
+
+msgid "Sinhala"
+msgstr "Sinhala"
+
+msgid "Slovak"
+msgstr "Slovak"
+
+msgid "Slovenian"
+msgstr "Slovenian"
+
+msgid "Somali"
+msgstr "Somali"
+
+msgid "Southern Sotho"
+msgstr "Southern Sotho"
+
+msgid "Spanish"
+msgstr "Spanish"
+
+msgid "Sundanese"
+msgstr "Sundanese"
+
+msgid "Swahili"
+msgstr "Swahili"
+
+msgid "Swati"
+msgstr "Swati"
+
+msgid "Swedish"
+msgstr "Swedish"
+
+msgid "Tagalog"
+msgstr "Tagalog"
+
+msgid "Tahitian"
+msgstr "Tahitian"
+
+msgid "Tajik"
+msgstr "Tajik"
+
+msgid "Tamil"
+msgstr "Tamil"
+
+msgid "Tatar"
+msgstr "Tatar"
+
+msgid "Telugu"
+msgstr "Telugu"
+
+msgid "Thai"
+msgstr "Thai"
+
+msgid "Tibetan"
+msgstr "Tibetan"
+
+msgid "Tigrinya"
+msgstr "Tigrinya"
+
+msgid "Tonga"
+msgstr "Tonga"
+
+msgid "Tsonga"
+msgstr "Tsonga"
+
+msgid "Tswana"
+msgstr "Tswana"
+
+msgid "Turkish"
+msgstr "Turkish"
+
+msgid "Turkmen"
+msgstr "Turkmen"
+
+msgid "Uighur"
+msgstr "Uighur"
+
+msgid "Ukrainian"
+msgstr "Ukrainian"
+
+msgid "Urdu"
+msgstr "Urdu"
+
+msgid "Uzbek"
+msgstr "Uzbek"
+
+msgid "Venda"
+msgstr "Venda"
+
+msgid "Vietnamese"
+msgstr "Vietnamese"
+
+msgid "Volapük"
+msgstr "Volapük"
+
+msgid "Walloon"
+msgstr "Walloon"
+
+msgid "Welsh"
+msgstr "Welsh"
+
+msgid "Wolof"
+msgstr "Wolof"
+
+msgid "Xhosa"
+msgstr "Xhosa"
+
+msgid "Yiddish"
+msgstr "Yiddish"
+
+msgid "Yoruba"
+msgstr "Yoruba"
+
+msgid "Zhuang"
+msgstr "Zhuang"
+
+msgid "Zulu"
+msgstr "Zulu"
+
+msgid "Improviser"
+msgstr "Improviser"
+
+msgid "Scenarist"
+msgstr "Scenarist"
+
+msgid "MC"
+msgstr "MC"
