@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 
 from app.db.database import get_db
 from app.news.schemas import (
-    ElasticsearchSyncResponse,
     IdResponse,
     NewsCommentCreate,
     NewsCommentResponse,
@@ -17,12 +16,13 @@ from app.news.schemas import (
     NewsReactionSummary,
     NewsResponse,
     NewsUpdate,
+    QueueSyncResponse,
     StatusResponse,
 )
 from app.news.services import one_or_404, rows_as_dicts, session_user_name, sync_news_queue_once
 
 router = APIRouter(prefix="/news", tags=["News"])
-admin_router = APIRouter(prefix="/admin/elasticsearch", tags=["Admin"])
+admin_router = APIRouter(prefix="/admin/news", tags=["Admin"])
 
 
 @router.post("", response_model=IdResponse, status_code=status.HTTP_201_CREATED)
@@ -228,6 +228,6 @@ def reactions_summary(news_id: int, db: Session = Depends(get_db)):
     return rows_as_dicts(rows)
 
 
-@admin_router.post("/sync-once", response_model=ElasticsearchSyncResponse)
+@admin_router.post("/sync-queue-once", response_model=QueueSyncResponse)
 def sync_once(limit: int = Query(100, ge=1, le=1000), db: Session = Depends(get_db)):
     return sync_news_queue_once(db, limit)

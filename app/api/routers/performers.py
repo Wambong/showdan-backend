@@ -11,7 +11,6 @@ import logging
 from app.db.database import get_db
 from app.models.performer import Performer
 from app.schemas.performer import PerformerCreate, PerformerUpdate, PerformerLongResponse, PerformerShortResponse
-from app.core.elastic import es_client
 
 router = APIRouter(prefix="/performers", tags=["Performers"])
 logger = logging.getLogger(__name__)
@@ -76,10 +75,7 @@ def enrich_es_hit(hit: dict, db: Session) -> dict:
 
 # --- ФОНОВЫЕ ЗАДАЧИ (оставляем без изменений) ---
 def sync_to_es(doc_id: str, es_doc: dict):
-    try:
-        es_client.index(index="performers", id=doc_id, document=es_doc)
-    except Exception as e:
-        logger.error(f"ES Sync failed: {e}")
+    return None
 
 # --- ЭНДПОИНТЫ ---
 @router.post("", response_model=PerformerLongResponse, status_code=201)
@@ -155,57 +151,65 @@ def search_performers(
     short: Optional[bool] = True,
     db: Session = Depends(get_db)
 ):
-    query_body = {"bool": {"must": [], "filter": []}}
-
+    stmt = select(Performer)
     if q:
-        query_body["bool"]["must"].append({
-            "multi_match": {
-                "query": q,
-                "fields": ["stage_name^3", "first_name", "last_name", "about"],
-                "fuzziness": "AUTO"
-            }
-        })
-    else:
-        query_body["bool"]["must"].append({"match_all": {}})
-
+        pattern = f"%{q}%"
+        stmt = stmt.where(
+            (Performer.stage_name.ilike(pattern))
+            | (Performer.first_name.ilike(pattern))
+            | (Performer.last_name.ilike(pattern))
+            | (Performer.about.ilike(pattern))
+            | (Performer.description.ilike(pattern))
+        )
     if city:
-        query_body["bool"]["filter"].append({"term": {"current_city_name.keyword": city}})
+        stmt = stmt.where(Performer.current_city_name == city)
     if type:
-        query_body["bool"]["filter"].append({"term": {"type": type}})
+        stmt = stmt.where(Performer.type == type)
     if genre_id:
-        query_body["bool"]["filter"].append({"term": {"genre_ids": genre_id}})
+        stmt = stmt.where(Performer.genre_ids.any(genre_id))
     if perf_language_id:
-        query_body["bool"]["filter"].append({"term": {"perf_language_ids": perf_language_id}})
+        stmt = stmt.where(Performer.perf_language_ids.any(perf_language_id))
 
-    try:
-        # Ищем в Elasticsearch (получаем только массивы ID)
-        response = es_client.search(index="performers", query=query_body, size=50)
-        hits = response["hits"]["hits"]
+    performers = db.execute(stmt.limit(50)).scalars().all()
+    if short:
+        return [
+            {
+                "id": performer.id,
+                "first_name": performer.first_name,
+                "last_name": performer.last_name,
+                "xp_points": performer.xp_points,
+                "rating": performer.rating,
+                "photo_url": performer.photo_url,
+            }
+            for performer in performers
+        ]
 
-        # Обогащаем каждый хит названиями из PostgreSQL
-        results = [enrich_es_hit(hit["_source"], db) for hit in hits]
-        if short:
-            results = [
-                {
-                    "id": hit['id'],
-                    "first_name": hit['first_name'],
-                    "last_name": hit['last_name'],
-                    "hourly_rate": hit['hourly_rate'],
-                    "photo_url": load_photo_urls([hit['id']], db)[hit['id']],
-                    "xp_points": load_xp_points([hit['id']], db)[hit['id']],
-                    "rating": hit['rating']
-                }
-                for hit in results
-            ]
-        else:
-            for hit in results:
-                hit['xp_points'] = load_xp_points([hit['id']], db)[hit['id']]
-        return results
-
-    except Exception as e:
-        raise e
-        logger.error(f"Search failed: {e}")
-        raise HTTPException(status_code=503, detail="Search service unavailable")
+    results = []
+    for performer in performers:
+        performer_dict = {
+            "id": performer.id,
+            "type": performer.type,
+            "first_name": performer.first_name,
+            "last_name": performer.last_name,
+            "stage_name": performer.stage_name,
+            "photo_url": performer.photo_url,
+            "about": performer.about,
+            "description": performer.description,
+            "current_city_name": performer.current_city_name,
+            "hourly_rate": performer.hourly_rate,
+            "rating": performer.rating,
+            "experience_years": performer.experience_years,
+            "birth_date": performer.birth_date,
+            "xp_points": performer.xp_points,
+            "current_level": performer.current_level,
+            "comm_language_ids": performer.comm_language_ids,
+            "perf_language_ids": performer.perf_language_ids,
+            "genre_ids": performer.genre_ids,
+            "event_category_ids": performer.event_category_ids,
+            "specific_attributes": performer.specific_attributes,
+        }
+        results.append(enrich_es_hit(performer_dict, db))
+    return results
 
 @router.get("/{performer_id}", response_model=PerformerLongResponse)
 def get_performer(performer_id: UUID, db: Session = Depends(get_db)):

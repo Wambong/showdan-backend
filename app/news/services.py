@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 from typing import Any
 
@@ -6,11 +5,9 @@ from fastapi import HTTPException, Request
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from app.core.elastic import es_client
 from app.db.database import engine
 
 PACKAGE_DIR = Path(__file__).resolve().parent.parent / "news_db_package"
-NEWS_INDEX = "news"
 
 
 def install_news_database() -> None:
@@ -30,12 +27,6 @@ def install_news_database() -> None:
             ALTER TABLE news ALTER COLUMN date_created SET DEFAULT CURRENT_TIMESTAMP;
             ALTER TABLE news ALTER COLUMN date_updated SET DEFAULT CURRENT_TIMESTAMP;
         """)
-
-
-def ensure_news_index() -> None:
-    mapping = json.loads((PACKAGE_DIR / "03_elasticsearch_index.json").read_text(encoding="utf-8"))
-    if not es_client.indices.exists(index=NEWS_INDEX):
-        es_client.indices.create(index=NEWS_INDEX, **mapping)
 
 
 def rows_as_dicts(rows) -> list[dict[str, Any]]:
@@ -69,35 +60,14 @@ def sync_news_queue_once(db: Session, limit: int = 100) -> dict[str, int]:
         {"limit": limit},
     ).mappings().all()
     processed = 0
-    failed = 0
 
     for row in rows:
         queue_id = row["id"]
-        entity_id = row["entity_id"]
-        action = row["action"]
-        payload = row["payload"] or {}
-        try:
-            if action == "DELETE":
-                es_client.options(ignore_status=[404]).delete(index=NEWS_INDEX, id=str(entity_id))
-            else:
-                doc = dict(payload)
-                lat = doc.pop("lat", None)
-                lng = doc.pop("lng", None)
-                if lat is not None and lng is not None:
-                    doc["location"] = {"lat": lat, "lon": lng}
-                es_client.index(index=NEWS_INDEX, id=str(entity_id), document=doc)
-
-            db.execute(
-                text("SELECT mark_elasticsearch_sync_processed(:queue_id)"),
-                {"queue_id": queue_id},
-            )
-            processed += 1
-        except Exception as exc:
-            db.execute(
-                text("SELECT mark_elasticsearch_sync_failed(:queue_id, :error)"),
-                {"queue_id": queue_id, "error": str(exc)},
-            )
-            failed += 1
+        db.execute(
+            text("SELECT mark_elasticsearch_sync_processed(:queue_id)"),
+            {"queue_id": queue_id},
+        )
+        processed += 1
 
     db.commit()
-    return {"processed": processed, "failed": failed}
+    return {"processed": processed, "failed": 0}

@@ -5,7 +5,6 @@ authlib[starlette]
 python-dotenv
 itsdangerous
 requests
-elasticsearch
 sqlalchemy
 asyncpg
 geoalchemy2

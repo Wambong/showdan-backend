@@ -1,37 +1,6 @@
-
 services:
-  elasticsearch:
-    image: elasticsearch:9.3.3
-    container_name: showdan-elastic
-    environment:
-      - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-      - xpack.security.enabled=false
-      - cluster.routing.allocation.disk.threshold_enabled=false
-    ports:
-      - "9200:9200"
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
-    restart: unless-stopped
-
-  es-init:
-    image: curlimages/curl:latest # Легковесный образ только с curl
-    container_name: showdan-es-init
-    depends_on:
-      - elasticsearch
-    environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-    volumes:
-      - ./init-es.sh:/scripts/init-es.sh:ro
-      - ./es_performers_mapping.json:/scripts/es_performers_mapping.json:ro
-      - ./performers_seed.ndjson:/scripts/performers_seed.ndjson:ro
-    working_dir: /scripts
-    # Скрипт сам дождется запуска ES благодаря циклу until curl в коде
-    command: [ "sh", "./init-es.sh" ]
-
   db:
     image: kartoza/postgis
-    container_name: "sql_db"
     ports:
       - "5432:5432"
     environment:
@@ -42,50 +11,67 @@ services:
       - db_data:/opt/postgres/data
       - ./init-script.sql:/docker-entrypoint-initdb.d/setup-db.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U showdan -d postgres"]
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -p 5432 -U showdan -d postgres"]
       interval: 5s
       timeout: 5s
       retries: 20
 
   redis:
     image: redis:7-alpine
-    container_name: showdan-redis
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
     restart: unless-stopped
 
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  ollama-init:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_started
+    environment:
+      OLLAMA_HOST: "http://ollama:11434"
+      AIRAG_LLM_MODEL: "llama3.2"
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      "until ollama list >/dev/null 2>&1; do sleep 2; done;
+      ollama pull $$AIRAG_LLM_MODEL"
+    restart: "no"
+
   backend:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      elasticsearch:
-        condition: service_started
-      es-init:
-        condition: service_started
       redis:
         condition: service_started
+      ollama:
+        condition: service_started
+      ollama-init:
+        condition: service_completed_successfully
       db:
         condition: service_healthy
     environment:
       DATABASE_URL: "postgresql://showdan:XkVMBg5Ik7vEW1hq8Orb@db:5432/postgres"
       REDIS_URL: "redis://redis:6379/0"
-      ELASTIC_URL: "http://elasticsearch:9200"
+      OLLAMA_BASE_URL: "http://ollama:11434"
+      AIRAG_LLM_MODEL: "llama3.2"
     image: showdan/backend
-    container_name: "showdan_backend"
     ports:
       - "8000:8000"
 
 volumes:
-  elassandra_data:
-    driver: local
-  elassandra_logs:
-    driver: local
   db_data:
     driver: local
-  esdata:
-    driver: local
   redis_data:
+    driver: local
+  ollama_data:
     driver: local

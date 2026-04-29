@@ -7,6 +7,8 @@ from sqlalchemy.exc import OperationalError
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
+from app.AIRAG.router import router as airag_router
+from app.AIRAG.services import install_airag_database
 from app.api.routers import performers
 from app.chat import models as chat_models
 from app.chat.redis_manager import chat_manager
@@ -17,7 +19,7 @@ from app.db.database import Base, engine
 from app.models.chat_user import ChatUser
 from app.news.router import admin_router as news_admin_router
 from app.news.router import router as news_router
-from app.news.services import ensure_news_index, install_news_database
+from app.news.services import install_news_database
 
 app = FastAPI(title=settings.PROJECT_NAME)
 logger = logging.getLogger(__name__)
@@ -45,6 +47,7 @@ app.include_router(performers.router)
 app.include_router(chat_router)
 app.include_router(news_router)
 app.include_router(news_admin_router)
+app.include_router(airag_router)
 
 
 @app.on_event("startup")
@@ -161,10 +164,7 @@ def create_chat_tables():
                 chat_models.ChatMessage.__table__,
             ])
             install_news_database()
-            try:
-                ensure_news_index()
-            except Exception as exc:
-                logger.warning("News Elasticsearch index setup failed: %s", exc)
+            install_airag_database()
             return
         except OperationalError:
             if attempt == 30:

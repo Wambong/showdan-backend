@@ -1,5 +1,6 @@
-from elasticsearch import Elasticsearch
-import os
+class DisabledElasticsearchClient:
+    def __getattr__(self, name):
+        raise RuntimeError("Elasticsearch is disabled in this deployment")
 
-ELASTIC_URL = os.getenv("ELASTIC_URL", "http://localhost:9200")
-es_client = Elasticsearch(ELASTIC_URL)
+
+es_client = DisabledElasticsearchClient()

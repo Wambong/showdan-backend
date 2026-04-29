@@ -94,6 +94,6 @@ class StatusResponse(BaseModel):
     ok: bool
 
 
-class ElasticsearchSyncResponse(BaseModel):
+class QueueSyncResponse(BaseModel):
     processed: int
     failed: int
